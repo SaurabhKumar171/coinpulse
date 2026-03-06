@@ -10,39 +10,41 @@ const Header = () => {
   const pathname = usePathname();
 
   return (
-    <div className="main-container inner flex justify-between">
-      <Link href="/">
-        <Image
-          src="/assets/logo.svg"
-          alt="CoinPulse logo"
-          width={132}
-          height={40}
-        />
-      </Link>
-
-      <nav className="flex gap-8">
-        <Link
-          href="/"
-          className={cn("nav-link", {
-            "is-active": pathname === "/",
-            "is-home": true,
-          })}
-        >
-          Home
+    <header>
+      <div className="main-container inner">
+        <Link href="/">
+          <Image
+            src="/assets/logo.svg"
+            alt="CoinPulse logo"
+            width={132}
+            height={40}
+          />
         </Link>
 
-        <p>Search Modal</p>
+        <nav>
+          <Link
+            href="/"
+            className={cn("nav-link", {
+              "is-active": pathname === "/",
+              "is-home": true,
+            })}
+          >
+            Home
+          </Link>
 
-        <Link
-          href="/coins"
-          className={cn("nav-link", {
-            "is-active": pathname === "/coins",
-          })}
-        >
-          All coins
-        </Link>
-      </nav>
-    </div>
+          <p>Search Modal</p>
+
+          <Link
+            href="/coins"
+            className={cn("nav-link", {
+              "is-active": pathname === "/coins",
+            })}
+          >
+            All coins
+          </Link>
+        </nav>
+      </div>
+    </header>
   );
 };
 
