@@ -5,6 +5,7 @@ import Image from "next/image";
 import { formatCurrency, formatPercentage } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 import { TrendingUp, TrendingDown } from "lucide-react";
+import { DataTableColumn } from "@/type";
 
 const Categories = async () => {
   const categories = await fetcher<Category[]>("coins/categories");
