@@ -1,17 +1,29 @@
 import React from "react";
 import { fetcher } from "@/lib/coingecko.actions";
-import { CoinDetailsData } from "@/type";
+import { CoinDetailsData, OHLCData } from "@/type";
 import Image from "next/image";
 import { formatCurrency } from "@/lib/utils";
 import { CoinOverviewFallback } from "../fallback";
+import CandlestickChart from "../CandlestickChart";
 
 const CoinOverview = async () => {
-  let coin;
+  let coin: CoinDetailsData | null = null;
+  let coinOHLCData: OHLCData[] | null = null;
 
   try {
-    coin = await fetcher<CoinDetailsData>("coins/bitcoin", {
-      dex_pair_format: "symbol",
-    });
+    [coin, coinOHLCData] = await Promise.all([
+      await fetcher<CoinDetailsData>("coins/bitcoin", {
+        dex_pair_format: "symbol",
+      }),
+      await fetcher<OHLCData[]>("/coins/bitcoin/ohlc", {
+        vs_currency: "usd",
+        days: 1,
+        // interval: "hourly",
+        precision: "full",
+      }),
+    ]);
+
+    // console.log(coinOHLCData);
   } catch (error) {
     console.error("Error fetching coin overview:", error);
     return <CoinOverviewFallback />;
@@ -19,6 +31,8 @@ const CoinOverview = async () => {
 
   return (
     <div id="coin-overview">
+      <CandlestickChart data={coinOHLCData} coinId="bitcoin" />
+
       <div className="header pt-2">
         <Image src={coin.image.large} alt={coin.name} width={56} height={56} />
         <div className="info">

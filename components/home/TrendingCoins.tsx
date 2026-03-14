@@ -66,7 +66,7 @@ const TrendingCoins = async () => {
 
   return (
     <div id="trending-coins">
-      <h4>Trending Coins</h4>\{" "}
+      <h4>Trending Coins</h4>{" "}
       <DataTable
         data={trendingCoins.coins.slice(0, 6) || []}
         columns={columns}
