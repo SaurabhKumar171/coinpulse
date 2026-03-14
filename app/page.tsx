@@ -1,4 +1,9 @@
-import { CoinOverviewFallback, TrendingCoinsFallback } from "@/components/fallback";
+import {
+  CategoriesFallback,
+  CoinOverviewFallback,
+  TrendingCoinsFallback,
+} from "@/components/fallback";
+import Categories from "@/components/home/Categories";
 import CoinOverview from "@/components/home/CoinOverview";
 import TrendingCoins from "@/components/home/TrendingCoins";
 import { Suspense } from "react";
@@ -16,7 +21,11 @@ const Page = async () => {
         </Suspense>
       </section>
 
-      <section className="w-full mt-7 space-y-4">Categories</section>
+      <section className="w-full mt-7 space-y-4">
+        <Suspense fallback={<CategoriesFallback />}>
+          <Categories />
+        </Suspense>
+      </section>
     </main>
   );
 };
