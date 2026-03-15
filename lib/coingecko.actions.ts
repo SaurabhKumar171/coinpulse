@@ -73,3 +73,36 @@ export async function getPools(
     return fallback;
   }
 }
+
+export async function searchCoins(query: string) {
+  if (!query) return [];
+
+  try {
+    const data = await fetcher<{
+      coins: {
+        id: string;
+        name: string;
+        symbol: string;
+        thumb: string;
+        large: string;
+        market_cap_rank: number;
+      }[];
+    }>("/search", { query });
+
+    return data.coins ?? [];
+    // return (
+    //   data.coins?.map((coin) => ({
+    //     id: coin.id,
+    //     name: coin.name,
+    //     symbol: coin.symbol,
+    //     thumb: coin.thumb,
+    //     large: coin.large,
+    //     market_cap_rank: coin.market_cap_rank,
+    //     data: {}, // ensure this exists if your UI expects coin.data
+    //   })) ?? []
+    // );
+  } catch (error) {
+    console.log("Search coins error:", error);
+    return [];
+  }
+}

@@ -1,5 +1,6 @@
+"use client";
+
 import { ConverterProps } from "@/type";
-import React, { useState } from "react";
 import { Input } from "./ui/input";
 import Image from "next/image";
 import { formatCurrency } from "@/lib/utils";
@@ -12,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
 
 const Converter = ({ symbol, icon, priceList }: ConverterProps) => {
   const [currency, setCurrency] = useState("usd");

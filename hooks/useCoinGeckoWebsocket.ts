@@ -89,7 +89,7 @@ export const useCoinGeckoWebSocket = ({
     ws.onmessage = handleMessage;
     ws.onclose = () => setIsWsReady(false);
     ws.onerror = (error) => {
-      console.error("Websocket error: ", error);
+      // console.error("Websocket error: ", error);
       setIsWsReady(false);
     };
 
